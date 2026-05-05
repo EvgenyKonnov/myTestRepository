@@ -1,7 +1,7 @@
 import allure
 import requests
 
-BASE_URL = "http://5.181.109.28:9090/api/v3"
+BASE_URL = "http://5.181.109.28:9090/api/v3" # Тут хранится базовый URL
 
 @allure.feature("Pet")
 @allure.title("Попытка удалить несуществующего питомца")
@@ -23,7 +23,7 @@ class TestPet:
                 "id": 9999,
                 "name": "Non-existent Pet",
                 "status": "available"
-            }
+            } # Передаём тело запроса
             response = requests.put(url=f"{BASE_URL}/pet", json=payload)
 
         with allure.step("Проверка кода ответа"):
