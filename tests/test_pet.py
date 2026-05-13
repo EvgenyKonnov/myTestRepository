@@ -5,9 +5,9 @@ from .schemas.pet_schema import PET_SCHEMA
 
 BASE_URL = "http://5.181.109.28:9090/api/v3" # Тут хранится базовый URL
 
-@allure.feature("Pet")
-@allure.title("Попытка удалить несуществующего питомца")
 class TestPet:
+    @allure.feature("Pet")
+    @allure.title("Попытка удалить несуществующего питомца")
     def test_delete_nonexistent_pet(self):
         with allure.step("Отправка запроса на удаление несуществующего питомца"):
             response = requests.delete(url=f"{BASE_URL}/pet/9999")
