@@ -1,7 +1,6 @@
 import allure
 import jsonschema
 import requests
-
 from .schemas.pet_schema import PET_SCHEMA
 
 BASE_URL = "http://5.181.109.28:9090/api/v3" # Тут хранится базовый URL
@@ -43,9 +42,9 @@ class TestPet:
         with allure.step("Проверка кода ответа"):
             assert response.status_code == 404, 'Код ответа не совпал с ожидаемым'
 
-    @allure.title("Попытка создания нового питомца")
+    @allure.title("Попытка добавления нового питомца")
     def test_create_new_pet(self):
-        with allure.step("Отправка запроса на создание нового питомца"):
+        with allure.step("Отправка запроса на добавление нового питомца"):
             payload = {
                 "id": 10,
                 "name": "doggie",
