@@ -8,39 +8,44 @@ PET_SCHEMA = {
             "type": "string"
         },
         "category": {
-            "id": {
-                "type": "integer"
-            },
-            "name": {
-                "type": "string"
-            }
-        },
-        "photoUrls": {
-                "type": "array",
-                "items": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
                     "type": "string"
                 }
             },
-        "tags": {
-                "type": "array",
-                "items": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    }
-                }
-            },
-        "status": {
-                "type": "string",
-                "enum": [
-                    "available",
-                    "pending",
-                    "sold"
-                ]
+            "required": ["id", "name"],
+            "additionalProperties": False
+        },
+        "photoUrls": {
+            "type": "array",
+            "items": {
+                "type": "string"
             }
         },
+        "tags": {
+            "type": "array",
+            "items": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "available",
+                "pending",
+                "sold"
+            ]
+        }
+    },
     "required": ["id", "name", "photoUrls", "status"],
     "additionalProperties": False
 }
