@@ -42,8 +42,8 @@ class TestPet:
         with allure.step("Проверка кода ответа"):
             assert response.status_code == 404, 'Код ответа не совпал с ожидаемым'
 
-    @allure.title("Попытка добавления нового питомца")
-    def test_create_new_pet(self):
+    @allure.title("Попытка добавления нового питомца с полными данными")
+    def test_create_new_pet_full_data(self):
         with allure.step("Отправка запроса на добавление нового питомца"):
             payload = {
                 "id": 10,
@@ -75,7 +75,7 @@ class TestPet:
            assert response_json ['photoUrls'] == payload['photoUrls'], 'Фото питомца не совпадает с ожидаемым'
            assert response_json ['status'] == payload['status'], 'Статус питомца не совпадает с ожидаемым'
 
-    @allure.title("Добавление нового питомца")
+    @allure.title("Попытка добавления нового питомца с неполными данными")
     def test_create_new_pet(self):
         with allure.step("Отправка запроса на добавление нового питомца"):
             payload = {
