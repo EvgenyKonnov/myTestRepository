@@ -1,7 +1,6 @@
 import allure
 import jsonschema
 import requests
-
 from .schemas.store_schema import STORE_SCHEMA
 
 BASE_URL = "http://5.181.109.28:9090/api/v3"
@@ -21,7 +20,7 @@ class TestPetStore:
         with (allure.step("Проверка параметров заказа в ответе")):
             assert response_json['id'] == create_order["id"], 'ID заказа не совпадает с ожидаемым'
             assert response_json['petId'] == create_order['petId'], 'ID питомца в заказе не совпадает с ожидаемым'
-            assert response_json['quantity'] == create_order['quantity'], 'Количество товара в заказе не совпадает с ожидаемой'
+            assert response_json['quantity'] == create_order['quantity'], 'Количество товара в заказе не совпадает с ожидаемым'
             assert response_json['status'] == create_order['status'], 'Статус заказа не совпадает с ожидаемым'
             assert response_json['complete'] == create_order['complete'], 'Выполнение заказа не совпадает с ожидаемым'
 
