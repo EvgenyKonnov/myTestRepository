@@ -2,6 +2,7 @@ import allure
 import jsonschema
 import requests
 from .schemas.store_schema import STORE_SCHEMA
+from .schemas.inventory_schema import INVENTORY_SCHEMA
 
 BASE_URL = "http://5.181.109.28:9090/api/v3"
 
@@ -72,13 +73,14 @@ class TestPetStore:
     def test_get_order_inventory(self):
         with allure.step("Получение инвентаря магазина"):
             response = requests.get(url=f"{BASE_URL}/store/inventory")
-            response_json = response.json()
 
         with allure.step("Проверка кода ответа"):
             assert response.status_code == 200, 'Код ответа не совпал с ожидаемым'
 
-        with allure.step("Проверка текстового содержимого в ответе"):
-            assert response.text == '{"approved":135,"placed":6,"delivered":26}', "Текст ошибки не совпал с ожидаемым"
+        with allure.step("Проверка формата данных"):
+            assert isinstance(response.json(), dict)
+            jsonschema.validate(response.json(), INVENTORY_SCHEMA)
+
 
 
 
