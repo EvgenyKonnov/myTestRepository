@@ -55,20 +55,11 @@ class APIClient:
         with allure.step('Updating headers with autorization'):
             self.session.headers.update({'Authorization': f'Bearer {token}'})  # Обновляем заголовки (добавляем Token)
 
-    def get_booking_by_id(self, create_booking):
+    def get_booking_by_id(self, booking_id):
         with allure.step('Getting booking by id'):
-            booking_id = create_booking['bookingid']
             url = f"{self.base_url}{Endpoints.BOOKING_ENDPOINT}{booking_id}"  # Формируем переменную URL адреса
-            response = self.session.get(url, timeout = Timeouts.TIMEOUT)
-            response_json = response.json()
-            response.raise_for_status()
+            response = self.session.get(url, timeout=Timeouts.TIMEOUT)
         with allure.step('Checking status code'):
-            assert response.status_code == 200, f'Expected status code of 201, but got {response.status_code}'
-        with allure.step("Checking booking fields"):
-            assert response_json['bookingid'] == create_booking["bookingid"], 'Параметр bookingid не совпадает с ожидаемым'
-            assert response_json['firstname'] == create_booking['firstname'], 'Параметр firstname не совпадает с ожидаемым'
-            assert response_json['lastname'] == create_booking['lastname'], 'Параметр lastname не совпадает с ожидаемым'
-            assert response_json['totalprice'] == create_booking['totalprice'], 'Параметр totalprice не совпадает с ожидаемым'
-            assert response_json['depositpaid'] == create_booking['depositpaid'], 'Параметр depositpaid не совпадает с ожидаемым'
-            assert response_json['bookingdates'] == create_booking['bookingdates'], 'Параметр bookingdates не совпадает с ожидаемым'
-            assert response_json['additionalneeds'] == create_booking['additionalneeds'], 'Параметр additionalneeds не совпадает с ожидаемым'
+            assert response.status_code == 200, f'Expected status code of 200, but got {response.status_code}'
+            response_json = response.json()
+        return response_json
